@@ -21,16 +21,16 @@ decoder.save('decoder')
 trt_params = tensorrt.ConversionParams(precision_mode='FP16')
 
 converter = tensorrt.Converter(
-    input_saved_model_dir="encoder", conversion_params=params)
+    input_saved_model_dir="encoder", conversion_params=trt_params)
 converter.convert()
 converter.save('encoder_trt')
 
 converter = tensorrt.Converter(
-    input_saved_model_dir="stable_diffusion", conversion_params=params)
+    input_saved_model_dir="stable_diffusion", conversion_params=trt_params)
 converter.convert()
 converter.save('stable_diffusion_trt')
 
 converter = tensorrt.Converter(
-    input_saved_model_dir="decoder", conversion_params=params)
+    input_saved_model_dir="decoder", conversion_params=trt_params)
 converter.convert()
 converter.save('decoder_trt')
