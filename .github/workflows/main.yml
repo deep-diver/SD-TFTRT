@@ -1,0 +1,23 @@
+name: Trigger Training Pipeline
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2.4.2
+
+    - name: 'Install required Python packages'
+      id: prepare-step    
+      run: |
+        branch_name=`git branch`
+        echo "::set-output name=BRANCH_NAME::$branch_name"
+        
+    - name: 'Test'
+      env:
+        BRANCH_NAME: ${{ steps.prepare-step.outputs.BRANCH_NAME }}
+      run:
+        echo ${{ env.BRANCH_NAME }}
